@@ -1,18 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Enrollment } from './entities/enrollment.entity';
 import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
-import { UpdateEnrollmentDto } from './dto/update-enrollment.dto';
+//import { UpdateEnrollmentDto } from './dto/update-enrollment.dto';
 
 @Injectable()
 export class EnrollmentService {
-  create(createEnrollmentDto: CreateEnrollmentDto) {
-    return 'This action adds a new enrollment';
+  constructor(
+    @InjectRepository(Enrollment)
+    private readonly enrollmentRepository: Repository<Enrollment>,
+  ) {}
+
+  async create(createEnrollmentDto: CreateEnrollmentDto): Promise<Enrollment> {
+    return await this.enrollmentRepository.save(createEnrollmentDto);
   }
 
-  findAll() {
-    return `This action returns all enrollment`;
+  async findAll(): Promise<Enrollment[]> {
+    return await this.enrollmentRepository.find();
   }
 
-  findOne(id: number) {
+  /*async findOne(id: number) {
     return `This action returns a #${id} enrollment`;
   }
 
@@ -22,5 +30,5 @@ export class EnrollmentService {
 
   remove(id: number) {
     return `This action removes a #${id} enrollment`;
-  }
+  } */
 }
