@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CourseModule } from './course/course.module';
+import { EnrollmentModule } from './enrollment/enrollment.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CourseModule } from './course/course.module';
       synchronize: true,
     }),
     CourseModule,
+    EnrollmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
