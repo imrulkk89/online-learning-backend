@@ -16,7 +16,7 @@ export class Enrollment {
   studentName: string;
 
   @ManyToOne(() => Course, { eager: true })
-  @JoinColumn()
+  @JoinColumn({ name: 'courseId' }) // Specify the name of the foreign key column
   course: Course;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

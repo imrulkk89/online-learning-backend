@@ -1,11 +1,4 @@
-import { Type } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsObject,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
-import { CreateCourseDto } from 'src/course/dto/create-course.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateEnrollmentDto {
   @IsNotEmpty()
@@ -13,8 +6,5 @@ export class CreateEnrollmentDto {
   studentName: string;
 
   @IsNotEmpty()
-  @IsObject()
-  @ValidateNested({ each: true })
-  @Type(() => CreateCourseDto)
-  course: CreateCourseDto;
+  courseId: number;
 }

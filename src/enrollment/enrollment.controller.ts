@@ -16,8 +16,8 @@ export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
   @Post()
-  create(@Body() createEnrollmentDto: CreateEnrollmentDto) {
-    return this.enrollmentService.create(createEnrollmentDto);
+  create(@Body() enrollment: CreateEnrollmentDto) {
+    return this.enrollmentService.create(enrollment);
   }
 
   @Get()
