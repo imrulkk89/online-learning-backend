@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { CourseFilterParams } from './params';
 
 @Controller('course')
 export class CourseController {
@@ -23,6 +25,15 @@ export class CourseController {
   @Get()
   findAll() {
     return this.courseService.findAll();
+  }
+
+  @Get('filter')
+  async getFilterCourses(@Query() params: CourseFilterParams) {
+    return await this.courseService.filterCourses(
+      params.instructor,
+      params.maxPrice,
+      params.minDuration,
+    );
   }
 
   @Get(':id')
